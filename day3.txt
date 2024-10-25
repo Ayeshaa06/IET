@@ -1,0 +1,227 @@
+C:\Users\IET>mysql --host=192.168.10.150 --port=3306 --user=dac12 --password=welcome
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 80
+Server version: 8.1.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| dac12              |
+| information_schema |
+| performance_schema |
++--------------------+
+3 rows in set (0.02 sec)
+
+mysql> use dac12;
+Database changed
+mysql> show table;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> show tables;
++-----------------+
+| Tables_in_dac12 |
++-----------------+
+| course          |
+| faculty         |
+| faculty_phone   |
+| facultyaddress  |
+| modules         |
+| scheme          |
+| student         |
+| student_phone   |
+| studentaddress  |
++-----------------+
+9 rows in set (0.00 sec)
+
+mysql> create table course_modules(ID int primary key,courseID int foreign key,moduleID int foreign key,(courseID) references course(ID),(moduleID) references modules(ID));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key,moduleID int foreign key,(courseID) references course(ID),(moduleID)' at line 1
+mysql> create table course_modules(ID int primary key,courseID int,moduleID int, foreign key (courseID) references course(ID), foreign key(moduleID) references modules(ID));
+Query OK, 0 rows affected (1.07 sec)
+
+mysql> desc course_modules;
++----------+------+------+-----+---------+-------+
+| Field    | Type | Null | Key | Default | Extra |
++----------+------+------+-----+---------+-------+
+| ID       | int  | NO   | PRI | NULL    |       |
+| courseID | int  | YES  | MUL | NULL    |       |
+| moduleID | int  | YES  | MUL | NULL    |       |
++----------+------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> create table Student_Qualifications(ID int primary key,studentID int,Name varchar(128),college varchar(128),university varchar(128),marks varchar(45),year int, foreign key(studentID) references student(ID);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table Student_Qualifications(ID int primary key,studentID int,Name varchar(128),college varchar(128),university varchar(128),marks varchar(45),year int, foreign key(studentID) references student(ID);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select *from student;
+Empty set (0.16 sec)
+
+mysql> desc student;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| id        | int          | NO   | PRI | NULL    |       |
+| namefirst | varchar(45)  | YES  |     | NULL    |       |
+| namelast  | varchar(45)  | YES  |     | NULL    |       |
+| DOB       | date         | YES  |     | NULL    |       |
+| EmailID   | varchar(128) | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create table Student_Qualifications(ID int primary key,studentID int,Name varchar(128),college varchar(128),university varchar(128),marks varchar(45),year int, foreign key(studentID) references student(id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table Student_Qualifications(ID int primary key,studentid int,Name varchar(128),college varchar(128),university varchar(128),marks varchar(45),year int, foreign key(studentid) references student(id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table Student_Qualifications(ID int primary key,studentid int,Name varchar(128),college varchar(128),university varchar(128),marks varchar(45),year int, foreign key(studentid) references student(ID);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table Student_Qualifications(ID int primary key,studentid int,Name varchar(128),college varchar(128),university varchar(128),marks varchar(45),year int, foreign key(studentid) references student(ID);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table student_qualification(id int primary key,studentID int,name varchar(128),college varchar(128),university varchar(128),marks varchar(45),year int, foreign key(studentid) references student(id));
+Query OK, 0 rows affected (1.13 sec)
+
+mysql> create table Student_Qualifications(id int primary key,studentid int,Name varchar(128),college varchar(128),university varchar(128),marks varchar(45),year int, foreign key(studentid) references student(id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> desc student_qualification;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| id         | int          | NO   | PRI | NULL    |       |
+| studentID  | int          | YES  | MUL | NULL    |       |
+| name       | varchar(128) | YES  |     | NULL    |       |
+| college    | varchar(128) | YES  |     | NULL    |       |
+| university | varchar(128) | YES  |     | NULL    |       |
+| marks      | varchar(45)  | YES  |     | NULL    |       |
+| year       | int          | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> create Faculty_qualifications(ID int primary key,facultyID int,name varchar(128),college varchar(128),university varchar(128),marks varchar(44),year int, foreign key(facultyID) references faculty(ID));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Faculty_qualifications(ID int primary key,facultyID int,name varchar(128),colleg' at line 1
+mysql> create table Faculty_qualifications(ID int primary key,facultyID int,name varchar(128),college varchar(128),university varchar(128),marks varchar(44),year int, foreign key(facultyID) references faculty(ID));
+Query OK, 0 rows affected (1.02 sec)
+
+mysql> desc Faculty_qualifications;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| ID         | int          | NO   | PRI | NULL    |       |
+| facultyID  | int          | YES  | MUL | NULL    |       |
+| name       | varchar(128) | YES  |     | NULL    |       |
+| college    | varchar(128) | YES  |     | NULL    |       |
+| university | varchar(128) | YES  |     | NULL    |       |
+| marks      | varchar(44)  | YES  |     | NULL    |       |
+| year       | int          | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> create table course_batches(ID int primary key,Name varchar(45),courseID int,starton date,endson date,capacity int,foreign key (courseID) references course(ID
+    -> ));
+Query OK, 0 rows affected (0.70 sec)
+
+mysql> desc course_batches;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| ID       | int         | NO   | PRI | NULL    |       |
+| Name     | varchar(45) | YES  |     | NULL    |       |
+| courseID | int         | YES  | MUL | NULL    |       |
+| starton  | date        | YES  |     | NULL    |       |
+| endson   | date        | YES  |     | NULL    |       |
+| capacity | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> create table batch_students(ID int primary ,batchID int,studentID int,foreign key (batchID) references batch(ID)foreign key (studentID) references student(ID));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',batchID int,studentID int,foreign key (batchID) references batch(ID)foreign key' at line 1
+mysql> create table batch_students(ID int primary key ,batchID int,studentID int,foreign key (batchID) references batch(ID)foreign key (studentID) references student(ID));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key (studentID) references student(ID))' at line 1
+mysql> create table batch_students(ID int primary key ,batchID int,studentID int,foreign key (batchID) references batch(ID),foreign key (studentID) references student(ID));
+ERROR 1824 (HY000): Failed to open the referenced table 'batch'
+mysql> create table batch_students(ID int primary key ,batchID int,studentID int,foreign key (batchID) references course_batch(ID),foreign key (studentID) references student(ID));
+ERROR 1824 (HY000): Failed to open the referenced table 'course_batch'
+mysql> create table batch_students(ID int primary key ,batchID int,studentID int,foreign key (batchID) references course_batches(ID),foreign key (studentID) references student(ID));
+Query OK, 0 rows affected (0.61 sec)
+
+mysql> desc batch_students;
++-----------+------+------+-----+---------+-------+
+| Field     | Type | Null | Key | Default | Extra |
++-----------+------+------+-----+---------+-------+
+| ID        | int  | NO   | PRI | NULL    |       |
+| batchID   | int  | YES  | MUL | NULL    |       |
+| studentID | int  | YES  | MUL | NULL    |       |
++-----------+------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> create table student_cards(ID int primary key ,studentID int,name varchar (45),isActive bool,foreign key (studentID) references student(ID));
+Query OK, 0 rows affected (0.48 sec)
+
+mysql> desc student_cards;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| ID        | int         | NO   | PRI | NULL    |       |
+| studentID | int         | YES  | MUL | NULL    |       |
+| name      | varchar(45) | YES  |     | NULL    |       |
+| isActive  | tinyint(1)  | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> create table student_order(ID int primary key ,studentID int,date date,amount int,foreign key (studentID) references student(ID));
+Query OK, 0 rows affected (0.39 sec)
+
+mysql> desc student_order;
++-----------+------+------+-----+---------+-------+
+| Field     | Type | Null | Key | Default | Extra |
++-----------+------+------+-----+---------+-------+
+| ID        | int  | NO   | PRI | NULL    |       |
+| studentID | int  | YES  | MUL | NULL    |       |
+| date      | date | YES  |     | NULL    |       |
+| amount    | int  | YES  |     | NULL    |       |
++-----------+------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> show tables;
++------------------------+
+| Tables_in_dac12        |
++------------------------+
+| batch_students         |
+| course                 |
+| course_batches         |
+| course_modules         |
+| faculty                |
+| faculty_phone          |
+| faculty_qualifications |
+| facultyaddress         |
+| modules                |
+| scheme                 |
+| student                |
+| student_cards          |
+| student_order          |
+| student_phone          |
+| student_qualification  |
+| studentaddress         |
++------------------------+
+16 rows in set (0.00 sec)
+
+mysql> source"C:\Users\IET\Desktop\PRN 12\MySQLDEMOBLD7.SQL"
+    -> source C:\Users\IET\Desktop\PRN 12\MySQLDEMOBLD7.SQL
+ERROR:
+Unknown command '\U'.
+ERROR:
+Unknown command '\I'.
+ERROR:
+Unknown command '\D'.
+ERROR:
+Unknown command '\P'.
+ERROR:
+Unknown command '\M'.
+    -> ^C
+mysql> source C:/Users/IET/Desktop/PRN 12/MySQLDEMOBLD7.SQL
